@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gototodo.adapter.TaskAdapter;
+import com.example.gototodo.bottomSheet.AddTaskBottomSheet;
+import com.example.gototodo.database.TaskAppDatabase;
 import com.example.gototodo.models.TaskViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -35,6 +38,15 @@ public class HomeFragment extends Fragment {
         taskViewModel.getAllTasks().observe(getViewLifecycleOwner(), tasks -> {
             taskAdapter.setTasks(tasks);
         });
+
+        FloatingActionButton fab = view.findViewById(R.id.add_button);
+
+        fab.setOnClickListener(v -> {
+            AddTaskBottomSheet sheet =
+                    new AddTaskBottomSheet(TaskAppDatabase.getInstance(getContext()).taskDao());
+            sheet.show(getParentFragmentManager(), "AddTask");
+        });
+
     }
 
     @Override

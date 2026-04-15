@@ -1,6 +1,7 @@
 package com.example.gototodo.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tasks")
@@ -11,7 +12,7 @@ public class Task {
     public String category;
     public boolean isDone;
 
-    public Task(int id, String title, String category, boolean isDone){
+    public Task(String title, String category, boolean isDone){
         this.title = title;
         this.category = category;
         this.isDone = isDone;
